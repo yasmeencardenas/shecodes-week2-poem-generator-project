@@ -1,5 +1,10 @@
 function displayPoem(response) {
-  console.log("poem generated");
+  new Typewriter("#poem", {
+    strings: response.data.answer,
+    autoStart: true,
+    delay: 1,
+    cursor: "",
+  });
 }
 
 function generatePoem(event) {
@@ -17,14 +22,7 @@ function generatePoem(event) {
   poemElement.innerHTML = `<div class="generating">Generating a French poem about ${instructionsInput.value}</div>`;
 
   axios.get(apiUrl).then(displayPoem);
-
-  new Typewriter("#poem", {
-    strings: "La tombe dit à la rose",
-    autoStart: true,
-    delay: 1,
-    cursor: "",
-  });
 }
 
-let poemFormElement = document.querySelector("poem-generator-form");
+let poemFormElement = document.querySelector("#poem-generator-form");
 poemFormElement.addEventListener("submit", generatePoem);
